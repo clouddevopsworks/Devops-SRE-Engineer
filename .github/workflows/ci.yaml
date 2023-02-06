@@ -56,7 +56,7 @@ jobs:
           kubectl get po -A
       - name: create host path
         run: |
-          mkdir -p /mnt/data
+          sudo mkdir -p /mnt/data
       - name: create pv and pvc
         run: |
           kubectl apply -f pv.yaml
