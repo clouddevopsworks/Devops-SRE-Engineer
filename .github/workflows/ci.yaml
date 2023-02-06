@@ -26,7 +26,7 @@ jobs:
           docker images $image:$tag
       - name: docker scan    
         run: |
-          docker scan $image:$tag --json
+          docker scan -f Dockerfile $image:$tag --json
 
   # StatefulSet:
   #   needs: [image_build_and_scan]
