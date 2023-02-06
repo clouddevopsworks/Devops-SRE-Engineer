@@ -30,6 +30,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}  
       - name: Build Docker image
         run: |
+          pwd
           docker build . -t  clouddevopsworks/$image:$tag
       - name: docker scan  image
         continue-on-error: true
