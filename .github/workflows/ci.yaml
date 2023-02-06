@@ -24,11 +24,9 @@ jobs:
       - name: list images     
         run: |
           docker images $image:$tag
-      - name: Build and scan image
-        uses: ISID/build-and-scan-image@main
-        with:
-          tag: "$image:$tag"  # Image name and optionally tag in "name:tag" format
-          path: "."  # Path to base directory to run `docker build` command
+      - name: docker scan    
+        run: |
+          docker scan $image:$tag --json
 
   # StatefulSet:
   #   needs: [image_build_and_scan]
