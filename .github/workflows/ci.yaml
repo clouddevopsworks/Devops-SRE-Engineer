@@ -26,17 +26,12 @@ jobs:
       - name: build image       
         run: |
           docker build . -t  $image:$tag
+      - name: list images     
+        run: |
           docker images $image:$tag
+      - name: docker scan  image
+        run: |
           docker scan -f Dockerfile $image:$tag --accept-license --json
-      # - name: list images     
-      #   run: |
-      #     docker images $image:$tag
-      # # - name: docker scan login 
-      # #   run: |
-      # #     echo "y" | docker scan login --token  ${{ secrets.SNYK_AUTH_TOKEN }}
-      # - name: docker scan  image
-      #   run: |
-      #     docker scan -f Dockerfile $image:$tag --accept-license --json
 
   # StatefulSet:
   #   needs: [image_build_and_scan]
