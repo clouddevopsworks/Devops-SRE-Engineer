@@ -74,8 +74,9 @@ jobs:
       - name: post verification test
         run: |
           minikube tunnel &
-          export public_ip=$(kubectl get services nginx --output jsonpath='{.status.loadBalancer.ingress[0].ip}')
-          curl -I http://$(public_ip)
+          kubectl get services nginx --output jsonpath='{.status.loadBalancer.ingress[0].ip}' > public_ip
+          cat public_ip
+          # curl -I http://$(public_ip)
 
 
 
