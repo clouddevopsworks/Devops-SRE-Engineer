@@ -65,6 +65,8 @@ jobs:
           kubectl get pvc
       - name: create StatefulSet
         run: |
-          kubectl apply -f statefulset.yaml
+          export image=$image
+          export tag=$tag
+          envsubst < statefulset.yaml | kubectl apply -f -
           kubectl get statefulsets
           kubectl get svc -o wide
