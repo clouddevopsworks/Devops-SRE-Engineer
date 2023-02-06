@@ -68,12 +68,12 @@ jobs:
           envsubst < statefulset.yaml | kubectl apply -f -
       - name: check resources
         run: |
+          minikube tunnel &
           kubectl get statefulsets
           kubectl get svc -o wide
           kubectl get po -o wide
       - name: post verification test
         run: |
-          minikube tunnel &
           kubectl get services nginx --output jsonpath='{.status.loadBalancer.ingress[0].ip}'
           # curl -I http://$(public_ip)
 
