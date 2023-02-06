@@ -54,3 +54,12 @@ jobs:
         run: |
           minikube start
           kubectl get po -A
+      - name: create host path
+        run: |
+          mkdir -p /mnt/data
+      - name: create pv and pvc
+        run: |
+          kubectl apply -f pv.yaml
+          kubectl apply -f pvc.yaml
+      - name: create StatefulSet
+        run: kubectl apply -f statefulset.yaml
