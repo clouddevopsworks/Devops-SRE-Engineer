@@ -35,4 +35,4 @@ jobs:
       - name: docker scan  image
         # continue-on-error: true
         run: |
-          docker scan $image:$tag --accept-license --json
+          docker scan $image:$tag --accept-license --severity high --json
