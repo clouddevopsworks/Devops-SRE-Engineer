@@ -26,7 +26,7 @@ jobs:
       - name: build image       
         run: |
           docker build . -t  $image:$tag
-          docker scan --login
+          echo "y" | docker scan --login
       - name: list images     
         run: |
           docker images $image:$tag
