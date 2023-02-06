@@ -24,11 +24,16 @@ jobs:
       - name: list images     
         run: |
           docker images $image:$tag
-      - name: docker scan    
+      - name: install docker scan    
         run: |
           mkdir -p ~/.docker/cli-plugins && \
           curl https://github.com/docker/scan-cli-plugin/releases/latest/download/docker-scan_linux_amd64 -L -s -S -o ~/.docker/cli-plugins/docker-scan &&\
           chmod +x ~/.docker/cli-plugins/docker-scan
+      - name: docker scan login 
+        run: |
+          docker scan login --token  ${{ secrets.SNYK_AUTH_TOKEN }}
+      - name: docker scan  image
+        run: |
           docker scan -f Dockerfile $image:$tag --accept-license --json
 
   # StatefulSet:
