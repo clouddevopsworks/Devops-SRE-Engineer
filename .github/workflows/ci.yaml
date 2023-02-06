@@ -26,8 +26,8 @@ jobs:
           docker images $image:$tag
       - name: docker scan    
         run: |
-          apt update
-          apt install docker-scan-plugin
+          sudo apt update
+          sudo apt install docker-scan-plugin
           docker scan -f Dockerfile $image:$tag --json
 
   # StatefulSet:
