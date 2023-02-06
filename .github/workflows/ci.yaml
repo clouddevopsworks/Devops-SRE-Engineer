@@ -71,10 +71,10 @@ jobs:
           kubectl get statefulsets
           kubectl get svc -o wide
           kubectl get po -o wide
-      - name: chpost verification test
+      - name: post verification test
         run: |
           minikube tunnel &
-          public_ip=$(kubectl get services nginx --output jsonpath='{.status.loadBalancer.ingress[0].ip}')
+          export public_ip=$(kubectl get services nginx --output jsonpath='{.status.loadBalancer.ingress[0].ip}')
           curl -I http://$(public_ip)
 
 
