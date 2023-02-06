@@ -19,6 +19,9 @@ jobs:
       - name: build image       
         run: |
           docker build . -t  $image:$tag
+      - name: list images     
+        run: |
+          docker images
       - name: scan image
         run: |
           docker scan $image:$tag
