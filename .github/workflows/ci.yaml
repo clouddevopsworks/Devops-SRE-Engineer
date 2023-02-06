@@ -57,7 +57,7 @@ jobs:
       - name: create host path
         run: |
           sudo mkdir -p /mnt/data
-      - name: create pv and pvc
+      - name: create storageclass and pv
         run: |
           kubectl apply -f storageclass.yaml
           kubectl apply -f pv.yaml
@@ -66,11 +66,16 @@ jobs:
           export image=$image
           export tag=$tag
           envsubst < statefulset.yaml | kubectl apply -f -
-      - name: post verification
+      - name: check resources
         run: |
           kubectl get statefulsets
           kubectl get svc -o wide
           kubectl get po -o wide
+      - name: chpost verification test
+        run: |
+          minikube tunnel &
+          public_ip=$(kubectl get services nginx --output jsonpath='{.status.loadBalancer.ingress[0].ip}')
+          curl -I http://$(public_ip)
 
 
 
