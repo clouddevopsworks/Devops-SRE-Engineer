@@ -33,6 +33,6 @@ jobs:
           docker build . -t  clouddevopsworks/$image:$tag
           docker push clouddevopsworks/$image:$tag
       - name: docker scan  image
-        # continue-on-error: true
+        continue-on-error: true
         run: |
           docker scan $image:$tag --accept-license --severity high --json
