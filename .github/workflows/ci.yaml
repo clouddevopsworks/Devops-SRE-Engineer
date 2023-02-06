@@ -38,3 +38,19 @@ jobs:
       - name: Push Docker image
         run: |
           docker push clouddevopsworks/$image:$tag
+
+  deployment:
+    needs: [image_build_and_scan]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: 'devops-sre-engineer'
+      - name: install minikube
+        run: |
+          curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+          sudo install minikube-linux-amd64 /usr/local/bin/minikube
+      - name: start minukube    
+        run: |
+          minikube start
+          kubectl get po -A
