@@ -61,6 +61,8 @@ jobs:
         run: |
           kubectl apply -f pv.yaml
           kubectl apply -f pvc.yaml
+          kubectl get pv
+          kubectl get pvc
       - name: create StatefulSet
         run: |
           kubectl apply -f statefulset.yaml
