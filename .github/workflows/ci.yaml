@@ -30,6 +30,7 @@ jobs:
         run: |
           docker images $image:$tag
       - name: docker scan  image
+        if: success() || failure()
         run: |
           docker scan -f Dockerfile $image:$tag --accept-license --json
 
