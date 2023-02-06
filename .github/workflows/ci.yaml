@@ -59,14 +59,18 @@ jobs:
           sudo mkdir -p /mnt/data
       - name: create pv and pvc
         run: |
+          kubectl apply -f storageclass.yaml
           kubectl apply -f pv.yaml
-          kubectl apply -f pvc.yaml
-          kubectl get pv
-          kubectl get pvc
       - name: create StatefulSet
         run: |
           export image=$image
           export tag=$tag
           envsubst < statefulset.yaml | kubectl apply -f -
+      - name: post verification
+        run: |
           kubectl get statefulsets
           kubectl get svc -o wide
+          kubectl get po -o wide
+
+
+
