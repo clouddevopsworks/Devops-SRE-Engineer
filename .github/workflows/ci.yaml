@@ -67,3 +67,4 @@ jobs:
         run: |
           kubectl apply -f statefulset.yaml
           kubectl get statefulsets
+          kubectl get svc -o wide
