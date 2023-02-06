@@ -38,7 +38,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ tag }}
+          tags: $tag
           labels: ${{ steps.meta.outputs.labels }}
       - name: docker scan  image
         continue-on-error: true
