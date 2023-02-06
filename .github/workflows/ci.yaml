@@ -66,18 +66,18 @@ jobs:
           export image=$image
           export tag=$tag
           envsubst < statefulset.yaml | kubectl apply -f -
-      - name: check resources
+      - name: expose resources in minikube
         run: |
           minikube tunnel &
+          sleep 60
+      - name: post verification test
+        run: |
           kubectl get statefulsets
           kubectl get svc -o wide
           kubectl get po -o wide
-      - name: post verification test
-        run: |
-          sleep 60
           export public_ip=$(kubectl get services nginx --output jsonpath='{.status.loadBalancer.ingress[0].ip}')
           echo $public_ip
-          curl -I http://$(public_ip)
+          curl -I http://$(kubectl get services nginx --output jsonpath='{.status.loadBalancer.ingress[0].ip}')
 
 
 
