@@ -69,6 +69,7 @@ jobs:
           envsubst < statefulset.yaml | kubectl apply -f -
       - name: post verification test
         run: |
+          sleep 30
           kubectl get statefulsets
           kubectl get svc -o wide
           kubectl get po -o wide
