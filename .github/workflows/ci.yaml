@@ -67,10 +67,6 @@ jobs:
           export image=$image
           export tag=$tag
           envsubst < statefulset.yaml | kubectl apply -f -
-      - name: expose resources in minikube
-        run: |
-          minikube tunnel &
-          sleep 60
       - name: post verification test
         run: |
           kubectl get statefulsets
