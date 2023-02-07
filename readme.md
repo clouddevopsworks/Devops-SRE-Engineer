@@ -2,5 +2,5 @@
 
 - Create a docker image
 - Scan the image using `docker scan`
-- pused image into dockerhub
+- push image into dockerhub
 - deploy the application into minikube
