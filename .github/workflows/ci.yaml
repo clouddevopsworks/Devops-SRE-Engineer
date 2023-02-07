@@ -76,7 +76,8 @@ jobs:
           kubectl get statefulsets
           kubectl get svc -o wide
           kubectl get po -o wide
-          curl -I http://$(kubectl get services nginx --output jsonpath='{.status.loadBalancer.ingress[0].ip}')
+          # for the time being we cannot connect to minikube. but the idea is there should be a way of post verification
+          # curl -I http://$(kubectl get services nginx --output jsonpath='{.status.loadBalancer.ingress[0].ip}')
 
 
 
